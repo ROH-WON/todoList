@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const User = require("./user");
 const sequelize = new Sequelize("todo", "root", "password", {
   host: "localhost",
   dialect: "mysql",
@@ -35,7 +36,10 @@ class TodoModel extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Todo.belongsTo(db.User, { foreignKey: "todolist", targetKey: "id" });
+    db.Todo.belongsTo(db.User, {
+      // foreignKey: { name: "todoId" },
+      targetKey: "email",
+    });
     // User 모델이 필요함
   }
 }

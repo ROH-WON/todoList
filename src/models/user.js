@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 class User extends Sequelize.Model {
   static init(sequelize) {
@@ -22,10 +23,10 @@ class User extends Sequelize.Model {
           type: Sequelize.INTEGER.UNSIGNED,
           allowNull: false,
         },
-        create_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-          defaultValue: Sequelize.NOW,
+        createdAt: {
+          type: DataTypes.DATE,
+          allowNull: true,
+          defaultValue: DataTypes.NOW,
         },
       },
       {
@@ -41,7 +42,10 @@ class User extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.User.hasMany(db.Todo, { foreignKey: "userId", sourceKey: "id" });
+    db.User.hasMany(db.Todo, {
+      // foreignKey: { name: "todoId" },
+      sourceKey: "email",
+    });
   }
 }
 

@@ -1,5 +1,5 @@
 const passport = require("passport");
-// const local = require("./localStrategy");
+const local = require("./localStrategy");
 // const kakao = require("./kakaoStrategy");
 const User = require("../models/user");
 
@@ -15,5 +15,5 @@ passport.deserializeUser((id, done) => {
     .catch((err) => done(err));
 });
 
-// local();
+local();
 // kakao();
